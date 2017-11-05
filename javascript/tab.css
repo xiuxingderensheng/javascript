@@ -1,6 +1,8 @@
 .tab{
 	width:300px;
 }
+
+/* 标签 start */
 .tab-nav{
 	height: 30px;
 }
@@ -24,8 +26,9 @@
 .tab .tab-nav li.actived a{
 	color:#777;
 }
+/* 标签 end */
 
-
+/* 内容 start */
 .tab .content-wrap{
 	background:#fff;
 	padding:5px;
@@ -40,3 +43,4 @@
 .tab .content-wrap .content-item.current{
 	display:block;
 }
+/* 内容 end */

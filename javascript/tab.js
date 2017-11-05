@@ -1,5 +1,21 @@
 ;(function($, w){
 
+	//默认配置
+	var DEFAULT = {
+
+		//用来定义鼠标的触发类型
+		"triggerType":"click",
+
+		//切换效果
+		"effect":"default",
+
+		//默认展示第几个
+		"invoke":1,
+
+		//定义tab是否自动切换
+		"auto":false
+	};
+
 	var Tab = function(tab){
 
 		var _this_ = this;
@@ -7,90 +23,11 @@
 		//保存单个tab组件
 		this.tab = tab;
 
-		//默认配置
-		this.config = {
-			//用来定义鼠标的触发类型
-			"triggerType":"click",
-			//切换效果
-			"effect":"default",
-			//默认展示第几个
-			"invoke":1,
-			//定义tab是否自动切换
-			"auto":false
-		};
+		//初始化
+		_init.call(this);
 
-		//扩展配置参数
-		if(this.getConfig()){
-			$.extend(this.config,this.getConfig());
-		}
-
-		//保存标签列表和对应的内容列表
-		this.tabItems = tab.find('ul.tab-nav li');
-		this.contentItems = tab.find('div.content-wrap div.content-item');
-
-		//保存配置参数,减少查找次数
-		var config = this.config;
-
-		if(config.triggerType === "click"){
-
-			this.tabItems.bind(config.triggerType,function(){
-
-				_this_.invoke($(this));
-
-			});
-
-		}else if(config.triggerType === "mouseover" || config.triggerType != "click"){
-
-			this.tabItems.mouseover(function(){
-
-				var self = $(this);
-
-				_this_.timeout = w.setTimeout(function(){
-
-					console.log(self);
-
-					_this_.invoke(self);
-
-				}, 300);
-
-			}).mouseout(function(){
-
-				if(_this_.timeout){
-
-					w.clearTimeout(_this_.timeout);
-
-				}
-
-			});
-
-		}
-
-		//自动切换
-		if(config.auto){
-
-			//定义一个定时器
-			this.timer = null;
-
-			//计数器
-			this.loop = 0;
-
-			this.autoPlay();
-
-			this.tab.hover(function(){
-
-				w.clearInterval(_this_.timer);
-
-			},function(){
-				_this_.autoPlay();
-			});
-
-		}
-
-		if(config.invoke > 1){
-
-			this.invoke(this.tabItems.eq(config.invoke - 1));
-
-		}
+		//绑定事件
+		_bindEvent.call(this);
 	}
 
 	Tab.prototype = {
@@ -192,6 +129,104 @@
 		}
 
 	});
+
+
+	//初始化函数，静态私有方法
+	function _init(){
+
+		var _this_ = this;
+
+		//保存配置信息的变量
+		var config;
+
+		//扩展配置参数
+		if(this.getConfig()){
+
+			this.config = $.extend({}, DEFAULT, this.getConfig());
+
+		}else{
+
+			this.config = DEFAULT;
+
+		}
+
+		//保存标签列表和对应的内容列表
+		this.tabItems = this.tab.find('ul.tab-nav li');
+		this.contentItems = this.tab.find('div.content-wrap div.content-item');
+
+		//缓存配置变量，减少遍历成本
+		config = this.config;
+
+		//自动切换
+		if(config.auto){
+
+			//定义一个定时器
+			this.timer = null;
+
+			//计数器
+			this.loop = 0;
+
+			this.autoPlay();
+
+			this.tab.hover(function(){
+
+				w.clearInterval(_this_.timer);
+
+			},function(){
+				_this_.autoPlay();
+			});
+
+		}
+
+		if(config.invoke > 1){
+
+			this.invoke(this.tabItems.eq(config.invoke - 1));
+
+		}
+
+	}
+
+	//绑定事件
+	function _bindEvent(){
+
+		var _this_ = this;
+
+		//保存配置参数,减少查找次数
+		var config = this.config;
+
+		if(config.triggerType === "click"){
+
+			this.tabItems.bind(config.triggerType,function(){
+
+				_this_.invoke($(this));
+
+			});
+
+		}else if(config.triggerType === "mouseover" || config.triggerType != "click"){
+
+			this.tabItems.mouseover(function(){
+
+				var self = $(this);
+
+				_this_.timeout = w.setTimeout(function(){
+
+					_this_.invoke(self);
+
+				}, 300);
+
+			}).mouseout(function(){
+
+				if(_this_.timeout){
+
+					w.clearTimeout(_this_.timeout);
+
+				}
+
+			});
+
+		}
+
+	}
 
 	window.Tab = Tab;
 })(jQuery, window);
