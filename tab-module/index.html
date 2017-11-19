@@ -1,0 +1,174 @@
+<<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>tab选项卡</title>
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		body{
+			padding:100px 50px;
+			background:#323232;
+			font-size:12px;
+			font-family:"微软雅黑";
+		}
+		ul,li{
+			list-style:none;
+		}
+		.tab-view{
+			float:left;
+			margin-right: 10px;
+		}
+		.tab-view p{
+			color:#999;
+			margin-bottom: 20px;
+		}
+	</style>
+	<link rel="stylesheet" href="tab.css">
+	<script src="jquery-3.2.1.js"></script>
+	<script src="tab.js"></script>
+</head>
+<body>
+
+	<div class="tab-view">
+		<p>1.没有配置任何参数</p>
+		<!-- 双引号，JSON.parse -->
+		<div class="js-tab tab">
+			<ul class="tab-nav">
+				<li class="actived"><a href="javascript:void(0);">新闻 </a></li>
+				<li><a href="javascript:void(0);">娱乐</a></li>
+				<li><a href="javascript:void(0);">电影</a></li>
+				<li><a href="javascript:void(0);">科技</a></li>
+			</ul>
+			<div class="content-wrap">
+				<div class="content-item current">
+					<img src="screenshot/1.png" alt="">
+				</div>
+				<div class="content-item">
+					<img src="screenshot/2.png" alt="">
+				</div>
+				<div class="content-item">
+					<img src="screenshot/3.png" alt="">
+				</div>
+				<div class="content-item">
+					<img src="screenshot/4.png" alt="">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="tab-view">
+		<p>鼠标移入进行切换</p>
+		<!-- 双引号，JSON.parse -->
+		<div class="js-tab tab" data-config='
+			{
+				"triggerType":"mouseover",
+				"effect":"fade",
+				"invoke":2
+			}
+		'>
+			<ul class="tab-nav">
+				<li class="actived"><a href="javascript:void(0);">新闻 </a></li>
+				<li><a href="javascript:void(0);">娱乐</a></li>
+				<li><a href="javascript:void(0);">电影</a></li>
+				<li><a href="javascript:void(0);">科技</a></li>
+			</ul>
+			<div class="content-wrap">
+				<div class="content-item current">
+					<img src="screenshot/1.png" alt="">
+				</div>
+				<div class="content-item">
+					<img src="screenshot/2.png" alt="">
+				</div>
+				<div class="content-item">
+					<img src="screenshot/3.png" alt="">
+				</div>
+				<div class="content-item">
+					<img src="screenshot/4.png" alt="">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="tab-view">
+		<p>鼠标移入进行切换，切可以自动切换</p>
+		<!-- 双引号，JSON.parse -->
+		<div class="js-tab tab" data-config='
+			{
+				"triggerType":"mouseover",
+				"effect":"fade",
+				"invoke":2,
+				"auto":2000
+			}
+		'>
+			<ul class="tab-nav">
+				<li class="actived"><a href="javascript:void(0);">新闻 </a></li>
+				<li><a href="javascript:void(0);">娱乐</a></li>
+				<li><a href="javascript:void(0);">电影</a></li>
+				<li><a href="javascript:void(0);">科技</a></li>
+			</ul>
+			<div class="content-wrap">
+				<div class="content-item current">
+					<img src="screenshot/1.png" alt="">
+				</div>
+				<div class="content-item">
+					<img src="screenshot/2.png" alt="">
+				</div>
+				<div class="content-item">
+					<img src="screenshot/3.png" alt="">
+				</div>
+				<div class="content-item">
+					<img src="screenshot/4.png" alt="">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="tab-view">
+		<p>鼠标移入进行切换，切可以自动切换</p>
+		<!-- 双引号，JSON.parse -->
+		<div class="js-tab tab" data-config='
+			{
+				"triggerType":"click",
+				"effect":"default",
+				"invoke":3,
+				"auto":2000
+			}
+		'>
+			<ul class="tab-nav">
+				<li class="actived"><a href="javascript:void(0);">新闻 </a></li>
+				<li><a href="javascript:void(0);">娱乐</a></li>
+				<li><a href="javascript:void(0);">电影</a></li>
+				<li><a href="javascript:void(0);">科技</a></li>
+			</ul>
+			<div class="content-wrap">
+				<div class="content-item current">
+					<img src="screenshot/1.png" alt="">
+				</div>
+				<div class="content-item">
+					<img src="screenshot/2.png" alt="">
+				</div>
+				<div class="content-item">
+					<img src="screenshot/3.png" alt="">
+				</div>
+				<div class="content-item">
+					<img src="screenshot/4.png" alt="">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		$(function(){
+			
+			// Tab.init($(".js-tab"));
+
+			//jQuery插件写法
+			$(".js-tab").tab();
+
+		});
+	</script>
+</body>
+</html>
