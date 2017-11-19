@@ -16,6 +16,7 @@
 		"auto":false
 	};
 
+	//构造函数
 	var Tab = function(tab){
 
 		var _this_ = this;
