@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
 	devtool: "eval-source-map",//eval-source-map适用于开发阶段，生产阶段别用
@@ -8,7 +9,7 @@ module.exports = {
 	entry: __dirname + "/app/main.js",//__dirname是一个nodejs的全局变量，指向当前执行脚本所在的目录
 	output: {
 		path: __dirname + "/build",
-		filename: "bundle.js"
+		filename: "bundle-[hash].js"
 	},
 
 	//开发服务器配置
@@ -53,6 +54,8 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: __dirname + "/app/index.tmpl.html"
 		}),
-		new webpack.HotModuleReplacementPlugin()//热加载插件
+		new webpack.optimize.OccurrenceOrderPlugin(),
+		new webpack.optimize.UglifyJsPlugin(),
+		new ExtractTextPlugin("style.css")
 	]
 }

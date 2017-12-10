@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import config from './config.json';
+import styles from './Greeter.css';//导入 css 文件
 
 class Greeter extends Component{
 	render() {
 		return (
-			<div>
-				<h1>{config.aa}</h1>
+			<div className={styles.root}>
+				{config.greetText}
 			</div>
 		);
 	}
